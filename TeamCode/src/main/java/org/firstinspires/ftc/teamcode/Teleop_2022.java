@@ -1,38 +1,29 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import static java.lang.StrictMath.abs;
 
-import androidx.collection.CircularArray;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-@TeleOp(name="Teleop_shooter", group="Teleop")
-@Disabled
 
+@TeleOp(name="Teleop_2022", group="Teleop")
+@Disabled
 public class Teleop_2022 extends LinearOpMode{
-    private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor lf = null;
-    private DcMotor rf = null;
-    private DcMotor lb = null;
-    private DcMotor rb = null;
+    private final ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        lf  = hardwareMap.get(DcMotor.class, "lf");
-        rf = hardwareMap.get(DcMotor.class, "rf");
-        lb  = hardwareMap.get(DcMotor.class, "lb");
-        rb = hardwareMap.get(DcMotor.class, "rb");
+        DcMotor lf = hardwareMap.get(DcMotor.class, "lf");
+        DcMotor rf = hardwareMap.get(DcMotor.class, "rf");
+        DcMotor lb = hardwareMap.get(DcMotor.class, "lb");
+        DcMotor rb = hardwareMap.get(DcMotor.class, "rb");
 
         lf.setDirection(DcMotor.Direction.REVERSE);
         rf.setDirection(DcMotor.Direction.FORWARD);
@@ -110,7 +101,7 @@ public class Teleop_2022 extends LinearOpMode{
                 rb.setPower(rbPower *0.25);
             }
 
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Status", "Run Time: " + runtime);
             telemetry.addData("Motors", "leftfront (%.2f), rightfront (%.2f),leftback (%.2f), rightback (%.2f)", lfPower, rfPower,lbPower ,rbPower);
             telemetry.update();
         }
