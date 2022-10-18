@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
- 
+
 @TeleOp(name="Teleop_2022", group="Teleop")
 @Disabled
 public class Teleop_2022 extends LinearOpMode{
