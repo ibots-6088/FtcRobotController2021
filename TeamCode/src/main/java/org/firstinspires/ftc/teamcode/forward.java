@@ -26,8 +26,6 @@ public class forward extends LinearOpMode {
         DcMotor rb = hardwareMap.get(DcMotor.class, "rb");
         //arm motor 1
         DcMotor tower1 = hardwareMap.get(DcMotor.class, "tower1");
-        //arm motor 2
-        DcMotor tower2 = hardwareMap.get(DcMotor.class, "tower2");
 
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -39,55 +37,35 @@ public class forward extends LinearOpMode {
         lb.setDirection(DcMotor.Direction.REVERSE);
         rb.setDirection(DcMotor.Direction.FORWARD);
         tower1.setDirection(DcMotor.Direction.FORWARD);
-        tower2.setDirection(DcMotor.Direction.FORWARD);
 
         waitForStart();
         gamepad1.rumble(1000);
         gamepad2.rumble(1000);
         while (opModeIsActive()) {
 
-            if (gamepad1.right_bumper) {
-                // right bumper, "sprint mode"
-                lf.setPower(0.75);
-                rf.setPower(0.75);
-                lb.setPower(0.75);
-                rb.setPower(0.75);
-            } else {
-                // normal power
-                lf.setPower(0.5);
-                rf.setPower(0.5);
-                lb.setPower(0.5);
-                rb.setPower(0.5);
-
                 double lPower;
                 double towerPower;
-                double towerPower2;
 
                 //powerMult = 0.8;
                 double deadzone;
-                deadzone = 0.2f;
+                deadzone = 0.5f;
 
                 lPower = gamepad1.left_stick_y;
                 double rPower = gamepad1.right_stick_y;
                 towerPower = gamepad2.right_trigger;
-                towerPower2 = gamepad2.left_trigger;
+
 
                 if (towerPower <= deadzone) {
                     towerPower = 0.0f;
-                }
-                if (towerPower2 <= deadzone) {
-                    towerPower2 = 0.0f;
                 }
 
                 lf.setPower(lPower);
                 rf.setPower(rPower);
                 lb.setPower(lPower);
                 rb.setPower(rPower);
-                tower1.setPower((towerPower - towerPower2) * 0.5);
-                tower2.setPower((towerPower - towerPower2) * 0.5);
+                tower1.setPower(towerPower);
 
 
-            }
         }
     }
 }
