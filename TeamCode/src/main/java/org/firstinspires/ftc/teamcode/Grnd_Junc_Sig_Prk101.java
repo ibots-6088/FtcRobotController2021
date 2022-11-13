@@ -44,7 +44,7 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
         while (opModeIsActive() && (runtime.seconds() < 30.0)) {
 
 
-            tower1.setPower(0);
+          /*  tower1.setPower(0);
             lf.setPower(-0.5);
             rf.setPower(-0.5);
             lb.setPower(0.5);
@@ -59,7 +59,7 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
             lb.setPower(-0.5 * sidemult);
             rb.setPower(-0.5 * sidemult);
 
-            sleep(250); // Forward to low junction
+            sleep(500); // Forward to low junction
 
             tower1.setPower(-0.3);
             lf.setPower(0.5);
@@ -67,7 +67,7 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
             lb.setPower(0.5);
             rb.setPower(0.5);
 
-            sleep(250); // Drop cone in low junction
+            sleep(500); // Drop cone in low junction
 
             tower1.setPower(0);
             lf.setPower(0.5);
@@ -75,7 +75,7 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
             lb.setPower(0.5);
             rb.setPower(0.5);
 
-            sleep(250); // Back away from low junction
+            sleep(500); // Back away from low junction
 
             tower1.setPower(0);
             lf.setPower(0.5);
@@ -83,7 +83,7 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
             lb.setPower(-0.5);
             rb.setPower(-0.5);
 
-            sleep(250); // Strafe right
+            sleep(500); // Strafe right
 
             tower1.setPower(-0.5);
             lf.setPower(-0.5);
@@ -91,7 +91,7 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
             lb.setPower(-0.5);
             rb.setPower(-0.5);
 
-            sleep(250); // Forward and scan cone
+            sleep(500); // Forward and scan cone */
 
             tower1.setPower(0);
             lf.setPower(0.5);
@@ -99,7 +99,7 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
             lb.setPower(0.5);
             rb.setPower(0.5);
 
-            sleep(750); // Park in designated parking space
+            sleep(950); // Park in designated parking space
 
             tower1.setPower(0);
             lf.setPower(0);
@@ -107,7 +107,7 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
             lb.setPower(0);
             rb.setPower(0);
 
-            sleep(25000); // Stop
+            sleep(30000); // Stop
         }
     }
 } 

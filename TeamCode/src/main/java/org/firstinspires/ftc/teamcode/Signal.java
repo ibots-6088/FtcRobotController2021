@@ -63,7 +63,7 @@ public class Signal extends LinearOpMode {
             lb.setPower(-0.5 * sidemult);
             rb.setPower(-0.5 * sidemult);
 
-            sleep(521); // Forward to low junction
+            sleep(477); // Forward to low junction
         }
     }
 }
