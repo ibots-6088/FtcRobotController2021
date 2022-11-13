@@ -55,7 +55,7 @@ public class forward extends LinearOpMode {
                 towerPower = gamepad2.right_trigger;
 
 
-                if (towerPower <= deadzone) {
+            if (towerPower <= deadzone) {
                     towerPower = 0.0f;
                 }
 
@@ -65,6 +65,31 @@ public class forward extends LinearOpMode {
                 rb.setPower(rPower * -.45);
                 tower1.setPower(towerPower);
 
+            //srafe
+            if(gamepad1.dpad_down){
+                lf.setPower(lPower * 1.0);
+                rf.setPower(rPower * 1.0);
+                lb.setPower(lPower * 1.0);
+                rb.setPower(rPower * 1.0);
+            }
+            if(gamepad1.dpad_up){
+                lf.setPower(lPower * -1.0);
+                rf.setPower(rPower * -1.0);
+                lb.setPower(lPower * -1.0);
+                rb.setPower(rPower * -1.0);
+            }
+            if(gamepad1.dpad_right){
+                lf.setPower(lPower * -.45);
+                rf.setPower(rPower * 1.0);
+                lb.setPower(lPower * 1.0);
+                rb.setPower(rPower * -1.0);
+            }
+            if(gamepad1.dpad_left){
+                lf.setPower(lPower * 1.0);
+                rf.setPower(rPower * -1.0);
+                lb.setPower(lPower * -1.0);
+                rb.setPower(rPower * 1.0);
+            }
         }
     }
 }
