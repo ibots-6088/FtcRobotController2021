@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name="Signal", group="Autonomous")
 //@Disabled
@@ -16,6 +17,8 @@ public class Signal extends LinearOpMode {
     private DcMotor rb = null;  //right back wheel
     //private DcMotor tower1 = null; //arm motor 1
     //private DcMotor tower2 = null; //arm motor 2
+    private DcMotor tower1 = null; //arm motor 1
+    private Servo clamp = null; //servo clamp
 
 
     @Override
@@ -29,6 +32,8 @@ public class Signal extends LinearOpMode {
         rb = hardwareMap.get(DcMotor.class, "rb");
         //tower1 = hardwareMap.get(DcMotor.class, "tower1");
         //tower2 = hardwareMap.get(DcMotor.class, "tower2");
+        tower1 = hardwareMap.get(DcMotor.class, "tower1");
+        clamp = hardwareMap.get(Servo.class, "clamp");
 
         double sidemult = -1.0; //Red side = 1.0 Blue = -1.0
 
@@ -40,6 +45,7 @@ public class Signal extends LinearOpMode {
         //tower1.setDirection(DcMotor.Direction.FORWARD);
         //tower2.setDirection(DcMotor.Direction.FORWARD);
 
+        tower1.setDirection(DcMotor.Direction.FORWARD);
 
         waitForStart();
         runtime.reset();
@@ -48,10 +54,12 @@ public class Signal extends LinearOpMode {
 
             //tower1.setPower(0);
             //tower2.setPower(0);
+            tower1.setPower(0);
             lf.setPower(0);
             rf.setPower(0);
             lb.setPower(0);
             rb.setPower(0);
+            clamp.setPosition(0);
 
             sleep(20000); // Wait for 20 Seconds
 
@@ -65,5 +73,13 @@ public class Signal extends LinearOpMode {
 
             sleep(477); // Forward to low junction
         }
+            tower1.setPower(0);
+            lf.setPower(-.6 * sidemult);
+            rf.setPower(.6 * sidemult);
+            lb.setPower(.6 * sidemult);
+            rb.setPower(-.6 * sidemult);
+            clamp.setPosition(.53);
+
+            sleep(1000);
     }
 }
