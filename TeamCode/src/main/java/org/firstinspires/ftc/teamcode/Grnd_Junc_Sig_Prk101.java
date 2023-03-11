@@ -16,7 +16,6 @@ public class Grnd_Junc_Sig_Prk101 extends LinearOpMode {
     private DcMotor lb = null;  //left back wheel
     private DcMotor rb = null;  //right back wheel
     private DcMotor tower1 = null; //arm motor 1
-
     private Servo clamp = null; //servo clamp
     
     @Override
