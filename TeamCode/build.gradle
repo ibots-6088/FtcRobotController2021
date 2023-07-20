@@ -28,5 +28,5 @@ dependencies {
 }
 
 dependencies {
-    implementation 'org.openftc:apriltag:1.1.1'
+    implementation 'org.openftc:apriltag:2.0.0'
 }
