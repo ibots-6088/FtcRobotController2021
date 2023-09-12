@@ -54,13 +54,23 @@ public class Teleop24 extends LinearOpMode {
                 rfPower = -1.0f;
                 lbPower = -1.0f;
                 rbPower = 1.0f; //Strafe Left
+            } else if (gamepad1.dpad_down) {
+                lfPower = -1.0f;
+                rfPower = -1.0f;
+                lbPower = -1.0f;
+                rbPower = -1.0f;//Drive Forward
+            } else if (gamepad1.dpad_up) {
+                lfPower = 1.0f;
+                rfPower = 1.0f;
+                lbPower = 1.0f;
+                rbPower = 1.0f;//Drive Backwards
             } else {
                 lfPower = gamepad1.left_stick_y;
                 lbPower = gamepad1.left_stick_y;
                 rbPower = gamepad1.right_stick_y;
                 rfPower = gamepad1.right_stick_y; //Return Control To The Sticks
             }
-            
+
 
             lf.setPower(lfPower * 0.5);
             lb.setPower(lbPower * 0.5);
