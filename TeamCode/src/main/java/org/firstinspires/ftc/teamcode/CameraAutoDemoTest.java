@@ -21,14 +21,10 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -36,13 +32,13 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@TeleOp
+@Autonomous
 public class CameraAutoDemoTest extends LinearOpMode
 {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
-    static final double FEET_PER_METER = 3.28084;
+    //static final double FEET_PER_METER = 3.28084;
 
     // Lens intrinsics
     // UNITS ARE PIXELS
@@ -56,9 +52,10 @@ public class CameraAutoDemoTest extends LinearOpMode
     // UNITS ARE METERS
     double tagsize = 0.166;
 
-    int ID_TAG_OF_INTEREST = 18; // Tag ID 18 from the 36h11 family
+    //int ID_TAG_OF_INTEREST = 1; // Tag ID 1 from the 36h11 family
 
-    AprilTagDetection tagOfInterest = null;
+    //AprilTagDetection tagOfInterest = null;
+    int tagID = -1;
 
     @Override
     public void runOpMode()
@@ -93,24 +90,25 @@ public class CameraAutoDemoTest extends LinearOpMode
         {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
 
-            //jh: most recent test point- came out a flickering 0-1
             telemetry.addData("detections:", currentDetections.size());
 
-            if(currentDetections.size() != 0)
-            {
-                boolean tagFound = false;
 
-                for(AprilTagDetection tag : currentDetections)
-                {
-                    if(tag.id == ID_TAG_OF_INTEREST)
+
+            if(currentDetections.size() != 0) {
+                //boolean tagFound = false;
+
+                for (AprilTagDetection tag : currentDetections) {
+                    /*if(tag.id == ID_TAG_OF_INTEREST)
                     {
                         tagOfInterest = tag;
                         tagFound = true;
                         break;
-                    }
+                    }*/
+                    telemetry.addData("tag seen: ", tag.id);
+                    tagID = tag.id;
                 }
 
-                if(tagFound)
+                /*if(tagFound)
                 {
                     telemetry.addLine("Tag of interest is in sight!\n\nLocation data:");
                     tagToTelemetry(tagOfInterest);
@@ -145,10 +143,12 @@ public class CameraAutoDemoTest extends LinearOpMode
                     tagToTelemetry(tagOfInterest);
                 }
 
+            }*/
             }
 
             telemetry.update();
-            sleep(20);
+
+            sleep(500);
         }
 
         /*
@@ -156,54 +156,68 @@ public class CameraAutoDemoTest extends LinearOpMode
          * during the init loop.
          */
 
-        /* Update the telemetry */
-        if(tagOfInterest != null)
-        {
-            telemetry.addLine("Tag snapshot:\n");
-            tagToTelemetry(tagOfInterest);
-            telemetry.update();
+        while (opModeIsActive()) {
+
+            telemetry.addLine("START!");
+
+            /* Update the telemetry */
+            if (tagID != -1) {
+                telemetry.addData("Tag ID: ", tagID);
+                //tagToTelemetry(18);
+                telemetry.update();
+            } else {
+                telemetry.addLine("No tag snapshot available, it was never sighted during the init loop :(");
+                telemetry.update();
+            }
+
+
+            switch (tagID) {
+                case 1:
+                    Program1();
+
+                    break;
+                case 2:
+                    Program2();
+
+                    break;
+                default:
+                    telemetry.addLine("RUNNING DEFAULT");
+                    Program2();
+
+                    break;
+            }
+
+            //sleep(10000000);
         }
-        else
-        {
-            telemetry.addLine("No tag snapshot available, it was never sighted during the init loop :(");
-            telemetry.update();
-        }
+
 
         /* Actually do something useful */
-        if(tagOfInterest == null)
+        /*
+        if(true)
         {
-            /*
-             * Insert your autonomous code here, presumably running some default configuration
-             * since the tag was never sighted during INIT
-             */
+            telemetry.addLine("RUNNING PROGRAM 1");
+        }
+        else if(tagID == 3)
+        {
+            //do something
+            telemetry.addLine("RUNNING PROGRAM 3");
         }
         else
         {
-            /*
-             * Insert your autonomous code here, probably using the tag pose to decide your configuration.
-             */
+            telemetry.addLine("RUNNING PROGRAM 2");
+        }*/
 
-            // e.g.
-            if(tagOfInterest.pose.x <= 20)
-            {
-                // do something
-            }
-            else if(tagOfInterest.pose.x >= 20 && tagOfInterest.pose.x <= 50)
-            {
-                // do something else
-            }
-            else if(tagOfInterest.pose.x >= 50)
-            {
-                // do something else
-            }
-        }
-
-
-        /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
-        while (opModeIsActive()) {sleep(20);}
     }
 
-    void tagToTelemetry(AprilTagDetection detection)
+    void Program1(){
+        telemetry.addLine("RUNNING PROGRAM 1");
+    }
+
+    void Program2(){
+        telemetry.addLine("RUNNING PROGRAM 2");
+    }
+
+    /*void tagToTelemetry(AprilTagDetection detection)
     {
         Orientation rot = Orientation.getOrientation(detection.pose.R, AxesReference.INTRINSIC, AxesOrder.YXZ, AngleUnit.DEGREES);
 
@@ -214,5 +228,5 @@ public class CameraAutoDemoTest extends LinearOpMode
         telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", rot.firstAngle));
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", rot.secondAngle));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", rot.thirdAngle));
-    }
+    }*/
 }
