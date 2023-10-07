@@ -9,12 +9,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp(name="Teleop24", group="Teleop")
 //@Disabled
 public class Teleop24 extends LinearOpMode {
-    DcMotor lf = null;
+    DcMotor lf = null;//assigns a name for the devices for the program
     DcMotor rf = null;
     DcMotor lb = null;
     DcMotor rb = null;
-
-    private float lfPower;
+    private float lfPower;//creates Variables for the motor power level
     private float rfPower;
     private float lbPower;
     private float rbPower;
@@ -24,8 +23,8 @@ public class Teleop24 extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        lf = hardwareMap.get(DcMotor.class, "lf");//left front wheel
-        rf = hardwareMap.get(DcMotor.class, "rf");//left front wheel
+        lf = hardwareMap.get(DcMotor.class, "lf");//left front wheel//assigns a name for the devices for the control hub
+        rf = hardwareMap.get(DcMotor.class, "rf");//right front wheel
         lb = hardwareMap.get(DcMotor.class, "lb");//left back wheel
         rb = hardwareMap.get(DcMotor.class, "rb");//right back wheel
 
@@ -34,13 +33,13 @@ public class Teleop24 extends LinearOpMode {
         lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        lf.setDirection(DcMotor.Direction.FORWARD);
+        lf.setDirection(DcMotor.Direction.FORWARD);//sets motor direction so that all the motors turn in the same direction
         rf.setDirection(DcMotor.Direction.REVERSE);
         lb.setDirection(DcMotor.Direction.FORWARD);
         rb.setDirection(DcMotor.Direction.REVERSE);
 
-        waitForStart();
-        gamepad1.rumble(1000);
+        waitForStart();//stops running code until the start button is pressed
+        gamepad1.rumble(1000);//makes the controllers shake when turned on
         gamepad2.rumble(1000);
         while (opModeIsActive()) {
 
