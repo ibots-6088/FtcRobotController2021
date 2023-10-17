@@ -1,14 +1,15 @@
+/*This is a test program for teleop, it is meant to test things without breaking the good program
+if you test something and it doesnt work, change it to something that works so that it doesnt interfere with future tests
+* Never Use In Competition
+    -AstroBoy*/
 package org.firstinspires.ftc.teamcode;
-
-//import com.qualcomm.robotcore.hardware.;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name="Teleop24", group="Teleop")
-//@Disabled
-public class Teleop24 extends LinearOpMode {
+@TeleOp(name="TeleopTestProgram_DO_NOT_RUN_IN_COMPETITION_", group="Teleop")
+public class TeleopTestProgram_DO_NOT_RUN_IN_COMPETITION_ extends LinearOpMode {
     DcMotor lf = null;//assigns a name for the devices for the program
     DcMotor rf = null;
     DcMotor lb = null;
@@ -41,8 +42,10 @@ public class Teleop24 extends LinearOpMode {
 
         if(gamepad1.a) {
             variable_speed = 1f;
+            gamepad1.left_stick_y = 1f;
         }else if(gamepad1.b) {
             variable_speed = .5f;
+            gamepad1.left_stick_y = .5f;
         }
 
 
@@ -52,25 +55,25 @@ public class Teleop24 extends LinearOpMode {
         while (opModeIsActive()) {
 
             if (gamepad1.dpad_right) {
-                lfPower = -1.0f;
-                rfPower = 1.0f;
-                lbPower = 1.0f;
-                rbPower = -1.0f; //Strafe Right
+                lfPower = -variable_speed;
+                rfPower = variable_speed;
+                lbPower = variable_speed;
+                rbPower = -variable_speed; //Strafe Right
             } else if (gamepad1.dpad_left) {
-                lfPower = 1.0f;
-                rfPower = -1.0f;
-                lbPower = -1.0f;
-                rbPower = 1.0f; //Strafe Left
+                lfPower = variable_speed;
+                rfPower = -variable_speed;
+                lbPower = -variable_speed;
+                rbPower = variable_speed; //Strafe Left
             } else if (gamepad1.dpad_down) {
-                lfPower = -1.0f;
-                rfPower = -1.0f;
-                lbPower = -1.0f;
-                rbPower = -1.0f;//Drive Forward
+                lfPower = -variable_speed;
+                rfPower = -variable_speed;
+                lbPower = -variable_speed;
+                rbPower = -variable_speed;//Drive Forward
             } else if (gamepad1.dpad_up) {
-                lfPower = 1.0f;
-                rfPower = 1.0f;
-                lbPower = 1.0f;
-                rbPower = 1.0f;//Drive Backwards
+                lfPower = variable_speed;
+                rfPower = variable_speed;
+                lbPower = variable_speed;
+                rbPower = variable_speed;//Drive Backwards
             } else {
                 lfPower = gamepad1.left_stick_y;
                 lbPower = gamepad1.left_stick_y;
@@ -79,10 +82,10 @@ public class Teleop24 extends LinearOpMode {
             }
 
 
-            lf.setPower(lfPower * 0.5);
-            lb.setPower(lbPower * 0.5);
-            rb.setPower(rbPower * 0.5);
-            rf.setPower(rfPower * 0.5);
-         }
+            lf.setPower(lfPower);
+            lb.setPower(lbPower);
+            rb.setPower(rbPower);
+            rf.setPower(rfPower);
+        }
     }
 }
