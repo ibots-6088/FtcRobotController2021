@@ -86,10 +86,10 @@ public class Teleop24Temp extends LinearOpMode {
             }
 
 
-            lf.setPower(lfPower * 0.5);
-            lb.setPower(lbPower * 0.5);
-            rb.setPower(rbPower * 0.5);
-            rf.setPower(rfPower * 0.5);
+            lf.setPower(lfPower * .75);
+            lb.setPower(lbPower * .75);
+            rb.setPower(rbPower * .75);
+            rf.setPower(rfPower * .75);
 
         }
     }
