@@ -4,14 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name="Teleop24", group="Teleop")
+@TeleOp(name="Teleop24Temp", group="Teleop")
 //@Disabled
-public class Teleop24 extends LinearOpMode {
+public class Teleop24Temp extends LinearOpMode {
     DcMotor lf = null;//assigns a name for the devices for the program
     DcMotor rf = null;
     DcMotor lb = null;
     DcMotor rb = null;
-    DcMotor arm = null;
     private float lfPower;//creates Variables for the motor power level
     private float rfPower;
     private float lbPower;
@@ -29,7 +28,7 @@ public class Teleop24 extends LinearOpMode {
         rf = hardwareMap.get(DcMotor.class, "rf");//right front wheel
         lb = hardwareMap.get(DcMotor.class, "lb");//left back wheel
         rb = hardwareMap.get(DcMotor.class, "rb");//right back wheel
-        arm = hardwareMap.get(DcMotor.class, "arm");//right back wheel
+
 
 
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -41,7 +40,7 @@ public class Teleop24 extends LinearOpMode {
         rf.setDirection(DcMotor.Direction.REVERSE);
         lb.setDirection(DcMotor.Direction.FORWARD);
         rb.setDirection(DcMotor.Direction.REVERSE);
-        arm.setDirection(DcMotor.Direction.FORWARD);
+
 
         if(gamepad1.a) {
             variable_speed = 1f;
@@ -91,8 +90,7 @@ public class Teleop24 extends LinearOpMode {
             lb.setPower(lbPower * 0.5);
             rb.setPower(rbPower * 0.5);
             rf.setPower(rfPower * 0.5);
-            arm.setPower(armPower * 0.5);
-            arm.setPower(armPowerDown * -0.5);
-         }
+
+        }
     }
 }
