@@ -72,10 +72,10 @@ public class Teleop24 extends LinearOpMode {
             }
             if (gamepad2.x){
             wrist.setPower(.5);
-            sleep(500);
+            sleep(250);
             }else if (gamepad2.y){
             wrist.setPower(-.5);
-            sleep(500);
+            sleep(250);
             }else {
                 wrist.setPower(0);
             }

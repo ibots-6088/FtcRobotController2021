@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="AutoTempBlueBackstage", group="Autonomous")
-public class AutoTempBlueBackstage extends LinearOpMode {
+@Autonomous(name="AutoTempRedBackstage", group="Autonomous")
+public class AutoTempRedBackstage extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();//assigns a variable for the program time limit
     private DcMotor lf = null;//assigns a name and a variable for the devices for the program
@@ -44,10 +44,10 @@ public class AutoTempBlueBackstage extends LinearOpMode {
 
 
 
-            lf.setPower(1);
-            rf.setPower(-1);
-            lb.setPower(-1);
-            rb.setPower(1);
+            lf.setPower(-1);
+            rf.setPower(1);
+            lb.setPower(1);
+            rb.setPower(-1);
 
             sleep(500);
 
@@ -63,3 +63,4 @@ public class AutoTempBlueBackstage extends LinearOpMode {
         }
     }
 }
+
