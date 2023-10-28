@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="Teleop24", group="Teleop")
 //@Disabled
@@ -12,6 +13,8 @@ public class Teleop24 extends LinearOpMode {
     DcMotor lb = null;
     DcMotor rb = null;
     DcMotor arm = null;
+    Servo claw = null;
+    DcMotor wrist = null;
     private float lfPower;//creates Variables for the motor power level
     private float rfPower;
     private float lbPower;
@@ -30,18 +33,22 @@ public class Teleop24 extends LinearOpMode {
         lb = hardwareMap.get(DcMotor.class, "lb");//left back wheel
         rb = hardwareMap.get(DcMotor.class, "rb");//right back wheel
         arm = hardwareMap.get(DcMotor.class, "arm");//right back wheel
+        claw = hardwareMap.get(Servo.class, "claw");//claw closing/opening mechanism
+        wrist = hardwareMap.get(DcMotor.class, "wrist");//claw rotation mechanism(motor)
 
 
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        wrist.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         lf.setDirection(DcMotor.Direction.FORWARD);//sets motor direction so that all the motors turn in the same direction
         rf.setDirection(DcMotor.Direction.REVERSE);
         lb.setDirection(DcMotor.Direction.FORWARD);
         rb.setDirection(DcMotor.Direction.REVERSE);
         arm.setDirection(DcMotor.Direction.FORWARD);
+        wrist.setDirection(DcMotor.Direction.FORWARD);
 
         if(gamepad1.a) {
             variable_speed = 1f;
@@ -57,6 +64,21 @@ public class Teleop24 extends LinearOpMode {
 
             armPower = gamepad2.right_trigger;
             armPowerDown = gamepad2.left_trigger;
+            if (gamepad2.a) {
+                claw.setPosition(1);
+            }
+            if (gamepad2.b) {
+                claw.setPosition(0);
+            }
+            if (gamepad2.x){
+            wrist.setPower(.5);
+            sleep(500);
+            }else if (gamepad2.y){
+            wrist.setPower(-.5);
+            sleep(500);
+            }else {
+                wrist.setPower(0);
+            }
 
 
             if (gamepad1.dpad_right) {
