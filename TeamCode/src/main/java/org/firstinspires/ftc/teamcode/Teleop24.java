@@ -43,10 +43,10 @@ public class Teleop24 extends LinearOpMode {
         rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         wrist.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        lf.setDirection(DcMotor.Direction.FORWARD);//sets motor direction so that all the motors turn in the same direction
-        rf.setDirection(DcMotor.Direction.REVERSE);
-        lb.setDirection(DcMotor.Direction.FORWARD);
-        rb.setDirection(DcMotor.Direction.REVERSE);
+        lf.setDirection(DcMotor.Direction.REVERSE);//sets motor direction so that all the motors turn in the same direction
+        rf.setDirection(DcMotor.Direction.FORWARD);
+        lb.setDirection(DcMotor.Direction.REVERSE);
+        rb.setDirection(DcMotor.Direction.FORWARD);
         arm.setDirection(DcMotor.Direction.FORWARD);
         wrist.setDirection(DcMotor.Direction.FORWARD);
 
@@ -108,13 +108,24 @@ public class Teleop24 extends LinearOpMode {
                 rfPower = gamepad1.right_stick_y; //Return Control To The Sticks
             }
 
-
-            lf.setPower(lfPower * 0.5);
-            lb.setPower(lbPower * 0.5);
-            rb.setPower(rbPower * 0.5);
-            rf.setPower(rfPower * 0.5);
+            if (gamepad1.a) {
+                lf.setPower(lfPower * 0.75);
+                lb.setPower(lbPower * 0.75);
+                rb.setPower(rbPower * 0.75);
+                rf.setPower(rfPower * 0.75);
+            } else if (gamepad1.b) {
+                lf.setPower(lfPower * 0.5);
+                lb.setPower(lbPower * 0.5);
+                rb.setPower(rbPower * 0.5);
+                rf.setPower(rfPower * 0.5);
+            } else {
+                lf.setPower(lfPower * 0.5);
+                lb.setPower(lbPower * 0.5);
+                rb.setPower(rbPower * 0.5);
+                rf.setPower(rfPower * 0.5);
+            }
             arm.setPower(armPower * 0.5);
             arm.setPower(armPowerDown * -0.5);
-         }
+        }
     }
 }
