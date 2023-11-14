@@ -4,9 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+
+import java.util.Base64;
 
 @Autonomous(name="RoadRunnerTest", group="Autonomous")
 public class RoadRunnerTest extends LinearOpMode {
@@ -17,6 +20,9 @@ public class RoadRunnerTest extends LinearOpMode {
     private DcMotor lb = null;
     private DcMotor rb = null;
     private ColorSensor CS = null;
+    private Base64.Encoder leftEncoder = null;
+    private Base64.Encoder rightEncoder = null;
+    private Encoder frontEncoder = null;
     public static final double TICKS_PER_REV = 537.6;
     public static class DriveConstants {
         public static final double MAX_RPM = 312;
@@ -45,6 +51,7 @@ public class RoadRunnerTest extends LinearOpMode {
             // see https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit#heading=h.61g9ixenznbx
             return 32767 / ticksPerSecond;
         }
+
     }
 
 
@@ -60,11 +67,15 @@ public class RoadRunnerTest extends LinearOpMode {
         rf = hardwareMap.get(DcMotor.class, "rf");//Right Front Motor
         lb = hardwareMap.get(DcMotor.class, "lb");//Left Back Motor
         rb = hardwareMap.get(DcMotor.class, "rb");//Right Back Motor
+        leftEncoder = (Base64.Encoder) hardwareMap.get(Base64.Encoder.class, "leftEncoder");
+        rightEncoder = (Base64.Encoder) hardwareMap.get(DcMotorEx.class, "rightEncoder");
+        frontEncoder = (Base64.Encoder) hardwareMap.get(DcMotorEx.class, "frontEncoder");
 
         lf.setDirection(DcMotor.Direction.FORWARD);//sets motor direction so that all the motors turn in the same direction
         rf.setDirection(DcMotor.Direction.REVERSE);
         lb.setDirection(DcMotor.Direction.FORWARD);
         rb.setDirection(DcMotor.Direction.REVERSE);
+
 
     }
 

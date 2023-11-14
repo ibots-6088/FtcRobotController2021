@@ -12,7 +12,8 @@ public class Teleop24 extends LinearOpMode {
     DcMotor rf = null;
     DcMotor lb = null;
     DcMotor rb = null;
-    DcMotor arm = null;
+    DcMotor arm1 = null;
+    DcMotor arm2 = null;
     Servo claw = null;
     DcMotor wrist = null;
     private float lfPower;//creates Variables for the motor power level
@@ -32,7 +33,8 @@ public class Teleop24 extends LinearOpMode {
         rf = hardwareMap.get(DcMotor.class, "rf");//right front wheel
         lb = hardwareMap.get(DcMotor.class, "lb");//left back wheel
         rb = hardwareMap.get(DcMotor.class, "rb");//right back wheel
-        arm = hardwareMap.get(DcMotor.class, "arm");//right back wheel
+        arm1 = hardwareMap.get(DcMotor.class, "arm");//arm motor 1
+        arm2 = hardwareMap.get(DcMotor.class, "arm");//arm motor 2
         claw = hardwareMap.get(Servo.class, "claw");//claw closing/opening mechanism
         wrist = hardwareMap.get(DcMotor.class, "wrist");//claw rotation mechanism(motor)
 
@@ -47,7 +49,8 @@ public class Teleop24 extends LinearOpMode {
         rf.setDirection(DcMotor.Direction.FORWARD);
         lb.setDirection(DcMotor.Direction.REVERSE);
         rb.setDirection(DcMotor.Direction.FORWARD);
-        arm.setDirection(DcMotor.Direction.FORWARD);
+        arm1.setDirection(DcMotor.Direction.FORWARD);
+        arm2.setDirection(DcMotor.Direction.FORWARD);
         wrist.setDirection(DcMotor.Direction.FORWARD);
 
         if(gamepad1.a) {
@@ -124,8 +127,10 @@ public class Teleop24 extends LinearOpMode {
                 rb.setPower(rbPower * 0.5);
                 rf.setPower(rfPower * 0.5);
             }
-            arm.setPower(armPower * 0.5);
-            arm.setPower(armPowerDown * -0.5);
+            arm1.setPower(armPower * 0.5);
+            arm1.setPower(armPowerDown * -0.5);
+            arm2.setPower(armPower * 0.5);
+            arm2.setPower(armPowerDown * -0.5);
         }
     }
 }

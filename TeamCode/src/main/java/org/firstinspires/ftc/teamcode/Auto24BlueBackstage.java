@@ -17,6 +17,7 @@ public class Auto24BlueBackstage extends LinearOpMode {
     private DcMotor rb = null;
     private ColorSensor CS = null;
 
+
     private int lfPos;//creates variable for the current encoder rotations
     private int lbPos;
     private int rfPos;
