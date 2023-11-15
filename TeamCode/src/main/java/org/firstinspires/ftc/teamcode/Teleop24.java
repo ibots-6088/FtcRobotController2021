@@ -14,15 +14,16 @@ public class Teleop24 extends LinearOpMode {
     DcMotor rb = null;
     DcMotor arm1 = null;
     DcMotor arm2 = null;
+    DcMotor LS1 = null;
+    DcMotor LS2 = null;
     Servo claw = null;
-    DcMotor wrist = null;
+    Servo wrist = null;
     private float lfPower;//creates Variables for the motor power level
     private float rfPower;
     private float lbPower;
     private float rbPower;
     private float armPower;
     private float armPowerDown;
-    private float variable_speed;
 
     @Override
     public void runOpMode(){
@@ -35,15 +36,17 @@ public class Teleop24 extends LinearOpMode {
         rb = hardwareMap.get(DcMotor.class, "rb");//right back wheel
         arm1 = hardwareMap.get(DcMotor.class, "arm");//arm motor 1
         arm2 = hardwareMap.get(DcMotor.class, "arm");//arm motor 2
+        LS1 = hardwareMap.get(DcMotor.class, "arm");//Linear Slide Motor 1
+        LS2 = hardwareMap.get(DcMotor.class, "arm");//Linear Slide Motor 2
         claw = hardwareMap.get(Servo.class, "claw");//claw closing/opening mechanism
-        wrist = hardwareMap.get(DcMotor.class, "wrist");//claw rotation mechanism(motor)
+        wrist = hardwareMap.get(Servo.class, "wrist");//claw rotation mechanism(motor)
 
 
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        wrist.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         lf.setDirection(DcMotor.Direction.REVERSE);//sets motor direction so that all the motors turn in the same direction
         rf.setDirection(DcMotor.Direction.FORWARD);
@@ -51,14 +54,8 @@ public class Teleop24 extends LinearOpMode {
         rb.setDirection(DcMotor.Direction.FORWARD);
         arm1.setDirection(DcMotor.Direction.FORWARD);
         arm2.setDirection(DcMotor.Direction.FORWARD);
-        wrist.setDirection(DcMotor.Direction.FORWARD);
-
-        if(gamepad1.a) {
-            variable_speed = 1f;
-        }else if(gamepad1.b) {
-            variable_speed = .5f;
-        }
-
+        LS1.setDirection(DcMotor.Direction.FORWARD);
+        LS2.setDirection(DcMotor.Direction.FORWARD);
 
         waitForStart();//stops running code until the start button is pressed
         gamepad1.rumble(1000);//makes the controllers shake when turned on
@@ -73,14 +70,23 @@ public class Teleop24 extends LinearOpMode {
             if (gamepad2.b) {
                 claw.setPosition(0);
             }
-            if (gamepad2.x){
-            wrist.setPower(.5);
+            if (gamepad2.x) {
+                wrist.setPosition(1);
+            }
+            if (gamepad2.y) {
+                wrist.setPosition(0);
+            }
+            if (gamepad2.right_bumper){
+            arm1.setPower(.5);
+            arm2.setPower(.5);
             sleep(250);
-            }else if (gamepad2.y){
-            wrist.setPower(-.5);
+            }else if (gamepad2.left_bumper){
+            arm1.setPower(-.5);
+            arm2.setPower(-.5);
             sleep(250);
             }else {
-                wrist.setPower(0);
+                arm1.setPower(0);
+                arm2.setPower(0);
             }
 
 
@@ -127,10 +133,10 @@ public class Teleop24 extends LinearOpMode {
                 rb.setPower(rbPower * 0.5);
                 rf.setPower(rfPower * 0.5);
             }
-            arm1.setPower(armPower * 0.5);
-            arm1.setPower(armPowerDown * -0.5);
-            arm2.setPower(armPower * 0.5);
-            arm2.setPower(armPowerDown * -0.5);
+            LS1.setPower(armPower * 0.5);
+            LS1.setPower(armPowerDown * -0.5);
+            LS2.setPower(armPower * 0.5);
+            LS2.setPower(armPowerDown * -0.5);
         }
     }
 }
